@@ -1,66 +1,36 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import Profile from "./Dashboard/Profile";
+import Settings from "./Dashboard/Settings";
+import { Route, Redirect } from "react-router-dom";
 export default function Dashboard() {
+  const [page, setPage] = useState("undefined");
+  
   return (
     <div>
       <div className="row">
         <div className="col-md-3">
-          <div class="flip-card p-2 mb-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
+          <div
+            className="flip-card p-2 mb-5"
+            onClick={(e) => setPage("Profile")}
+          >
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
                 <h4 className="text-dark p-2">Profile</h4>
               </div>
-              <div class="flip-card-back p-2">
+              <div className="flip-card-back p-2">
                 <h4 className="bg-dark p-2">Your profile</h4>
               </div>
             </div>
           </div>
-          <div class="flip-card p-2 my-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h4 className="text-dark p-2">Section One</h4>
-              </div>
-              <div class="flip-card-back p-2">
-                <h4 className="bg-dark p-2">This is Section One</h4>
-              </div>
-            </div>
-          </div>
-          <div class="flip-card p-2 my-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h4 className="text-dark p-2">Section Two</h4>
-              </div>
-              <div class="flip-card-back p-2">
-                <h4 className="bg-dark p-2">This is Section Two</h4>
-              </div>
-            </div>
-          </div>
-          <div class="flip-card p-2 my-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h4 className="text-dark p-2">Section Three</h4>
-              </div>
-              <div class="flip-card-back p-2">
-                <h4 className="bg-dark p-2">This is Section Three</h4>
-              </div>
-            </div>
-          </div>
-          <div class="flip-card p-2 my-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h4 className="text-dark p-2">Section Four</h4>
-              </div>
-              <div class="flip-card-back p-2">
-                <h4 className="bg-dark p-2">This is Section Four</h4>
-              </div>
-            </div>
-          </div>
-          <div class="flip-card p-2 my-5">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
+          <div
+            className="flip-card p-2 my-5"
+            onClick={(e) => setPage("Settings")}
+          >
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
                 <h4 className="text-dark p-2">Settings</h4>
               </div>
-              <div class="flip-card-back p-2">
+              <div className="flip-card-back p-2">
                 <h4 className="bg-dark p-2">This is Settings</h4>
               </div>
             </div>
@@ -68,39 +38,24 @@ export default function Dashboard() {
         </div>
         <div className="col-md-9">
           <div id="dashboard-content" className="m-4">
-            <div className="shadow1 p-5 w-100">
-              <h1>Profile</h1>
-              <hr />
-              <div className="row">
-                <div className="col-12">
-                  <div className="row">
-                    <div className="col-sm-6 col-12 text-center">
-                      <img className="p-2 w-50" src="logo512.png"/>
-                    </div>
-                    <div className="col-sm-6 col-12">
-                        <div className="row">
-                            <div className="shadow1 row mt-4 p-2">
-                                <div className="col-6 bold">Name:</div>
-                                <div className="col-6">React App</div>
-                            </div>
-                            <div className="shadow1 row mt-4 p-2">
-                                <div className="col-6 bold">Email:</div>
-                                <div className="col-6">info@reactapp.com</div>
-                            </div>
-                            <div className="shadow1 row mt-4 p-2">
-                                <div className="col-6 bold">Status:</div>
-                                <div className="col-6 text-success">Currently Active</div>
-                            </div>
-                            <div className="shadow1 row mt-4 p-2">
-                                <div className="col-6 bold">Last Seen:</div>
-                                <div className="col-6">2 weeks ago.</div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* {props.page == "profile" ? <Profile /> : <h1>Loading</h1>} */}
+            <Route
+              render={(props) =>{
+                switch (page) {
+                  case "Profile":
+                    return <Profile/>;
+                    break;
+                  case "Settings":
+                    return <Settings/>;
+                    break;
+            
+                  default:
+                    return <Profile/>;
+                    break;
+                }
+              }
+              }
+            />
           </div>
         </div>
       </div>
